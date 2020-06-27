@@ -1,8 +1,5 @@
 package com.iwhalecloud.exception;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.ConstraintViolationException;
-import javax.validation.ValidationException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -20,10 +17,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class GlobalExceptionHandler {
 
-    private static String PARAM_FAIL_CODE = "600";
-    private static String VALIDATION_CODE = "1003";
+    //private static String PARAM_FAIL_CODE = "600";
+    //private static String VALIDATION_CODE = "1003";
 
-    /*@ExceptionHandler(BindException.class)
+    @ExceptionHandler(BindException.class)
     public DcoosExceptionResponse validExceptionHandler(BindException bindException) {
         FieldError fieldError = bindException.getBindingResult().getFieldError();
         assert fieldError != null;
@@ -36,7 +33,7 @@ public class GlobalExceptionHandler {
         dcoosExceptionResponse.setReferenceError(fieldError.getDefaultMessage());
         dcoosExceptionResponse.setReason(fieldError.getField() + "错误");
         return dcoosExceptionResponse;
-    }*/
+    }
 
     /**
      * 方法参数校验
@@ -63,33 +60,33 @@ public class GlobalExceptionHandler {
     /**
      * ValidationException
      */
-    @ExceptionHandler(ValidationException.class)
+    /*@ExceptionHandler(ValidationException.class)
     public DcoosExceptionResponse handleValidationException(ValidationException e) {
         return new DcoosExceptionResponse(VALIDATION_CODE, e.getCause().getMessage());
-    }
+    }*/
 
     /**
      * ConstraintViolationException
      */
-    @ExceptionHandler(ConstraintViolationException.class)
+    /*@ExceptionHandler(ConstraintViolationException.class)
     public DcoosExceptionResponse handleConstraintViolationException(ConstraintViolationException e) {
         return new DcoosExceptionResponse(PARAM_FAIL_CODE, e.getMessage());
-    }
+    }*/
 
 
-    @ExceptionHandler(value = Exception.class)  //定义异常处理器
-    public Object exceptionHandler(HttpServletRequest request, Exception e) {
+    /*@ExceptionHandler(value = Exception.class)  //定义异常处理器
+    public Object dealExceptionHandler(Exception e) {
         String failMessage = null;
 
         //判断是否为绑定异常
-        /*if(e instanceof BindException){
+        *//*if(e instanceof BindException){
             BindException ex = (BindException)e;
             failMessage = ex.getBindingResult().getFieldError().getDefaultMessage();
             return validExceptionHandler(ex);
-        }*/
+        }*//*
 
         return failMessage;
-    }
+    }*/
 
 
     /**
